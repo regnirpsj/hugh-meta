@@ -19,7 +19,7 @@ Hull University Graphics Helper (HUGH)
 Introduction
 ============
 
-``hugh-meta`` is an (experimental) infrastructure project to support the various graphics modules at the `Department of Computer Science`_, `The University of Hull`_.
+``hugh-meta`` is the meta project for building all sub-projects for HUGH an (experimental) infrastructure project to support the various graphics modules at the `Department of Computer Science`_, `The University of Hull`_.
 
 Building and Installation
 =========================
