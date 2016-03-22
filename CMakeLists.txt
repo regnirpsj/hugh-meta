@@ -8,7 +8,7 @@
 
 cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 
-project(HUGH_META VERSION 0.0.1)
+project(HUGH_META VERSION 0.1.0)
 
 set(HUGH_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/install)
 
@@ -24,7 +24,7 @@ set(HUGH_INSTALL_COMMAND ${CMAKE_COMMAND} --build . --target install)
 
 include(ExternalProject)
 
-set(HUGH_CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${HUGH_INSTALL_PREFIX})
+set(HUGH_CMAKE_ARGS -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=${HUGH_INSTALL_PREFIX})
 
 externalproject_add(hugh-support
                     GIT_REPOSITORY      "http://github.com/regnirpsj/hugh-support.git"
@@ -35,7 +35,7 @@ externalproject_add(hugh-support
 		    INSTALL_COMMAND     ${HUGH_INSTALL_COMMAND}
 		    TEST_BEFORE_INSTALL 1)
 
-set(HUGH_CMAKE_ARGS -DHUGH_INSTALL_PREFIX=${HUGH_INSTALL_PREFIX})
+set(HUGH_CMAKE_ARGS -DCMAKE_BUILD_TYPE=Release -DHUGH_INSTALL_PREFIX=${HUGH_INSTALL_PREFIX})
 
 externalproject_add(hugh-fields
                     GIT_REPOSITORY      "http://github.com/regnirpsj/hugh-fields.git"
