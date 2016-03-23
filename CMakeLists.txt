@@ -47,6 +47,16 @@ externalproject_add(hugh-fields
 		    TEST_BEFORE_INSTALL 1
 		    DEPENDS             hugh-support)
 
+externalproject_add(hugh-platform
+                    GIT_REPOSITORY      "http://github.com/regnirpsj/hugh-platform.git"
+		    GIT_TAG             "master"
+		    CMAKE_ARGS          ${HUGH_CMAKE_ARGS}
+		    BUILD_COMMAND       ${HUGH_BUILD_COMMAND}
+		    TEST_COMMAND        ${HUGH_TEST_COMMAND}
+		    INSTALL_COMMAND     ${HUGH_INSTALL_COMMAND}
+		    TEST_BEFORE_INSTALL 1
+		    DEPENDS             hugh-support hugh-fields)
+
 externalproject_add(hugh-scene
                     GIT_REPOSITORY      "http://github.com/regnirpsj/hugh-scene.git"
 		    GIT_TAG             "master"
