@@ -8,7 +8,7 @@
 
 cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 
-project(HUGH_META VERSION 0.1.6)
+project(HUGH_META VERSION 0.1.7)
 
 set(HUGH_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/install)
 
@@ -26,8 +26,8 @@ include(ExternalProject)
 
 set(HUGH_CMAKE_ARGS -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=${HUGH_INSTALL_PREFIX})
 
-externalproject_add(hugh-support
-                    GIT_REPOSITORY      "http://github.com/regnirpsj/hugh-support.git"
+externalproject_add(hugh-build-system
+                    GIT_REPOSITORY      "http://github.com/regnirpsj/hugh-build-system.git"
 		    GIT_TAG             "master"
 		    CMAKE_ARGS          ${HUGH_CMAKE_ARGS}
 		    BUILD_COMMAND       ${HUGH_BUILD_COMMAND}
@@ -37,6 +37,16 @@ externalproject_add(hugh-support
 
 set(HUGH_CMAKE_ARGS -DCMAKE_BUILD_TYPE=Release -DHUGH_INSTALL_PREFIX=${HUGH_INSTALL_PREFIX})
 
+externalproject_add(hugh-support
+                    GIT_REPOSITORY      "http://github.com/regnirpsj/hugh-support.git"
+		    GIT_TAG             "master"
+		    CMAKE_ARGS          ${HUGH_CMAKE_ARGS}
+		    BUILD_COMMAND       ${HUGH_BUILD_COMMAND}
+		    TEST_COMMAND        ${HUGH_TEST_COMMAND}
+		    INSTALL_COMMAND     ${HUGH_INSTALL_COMMAND}
+		    TEST_BEFORE_INSTALL 1
+		    DEPENDS             hugh-build-system hugh-support)
+
 externalproject_add(hugh-fields
                     GIT_REPOSITORY      "http://github.com/regnirpsj/hugh-fields.git"
 		    GIT_TAG             "master"
@@ -45,7 +55,7 @@ externalproject_add(hugh-fields
 		    TEST_COMMAND        ${HUGH_TEST_COMMAND}
 		    INSTALL_COMMAND     ${HUGH_INSTALL_COMMAND}
 		    TEST_BEFORE_INSTALL 1
-		    DEPENDS             hugh-support)
+		    DEPENDS             hugh-build-system hugh-support)
 
 externalproject_add(hugh-platform
                     GIT_REPOSITORY      "http://github.com/regnirpsj/hugh-platform.git"
@@ -55,7 +65,7 @@ externalproject_add(hugh-platform
 		    TEST_COMMAND        ${HUGH_TEST_COMMAND}
 		    INSTALL_COMMAND     ${HUGH_INSTALL_COMMAND}
 		    TEST_BEFORE_INSTALL 1
-		    DEPENDS             hugh-support hugh-fields)
+		    DEPENDS             hugh-build-system hugh-support hugh-fields)
 
 externalproject_add(hugh-scene
                     GIT_REPOSITORY      "http://github.com/regnirpsj/hugh-scene.git"
@@ -65,4 +75,4 @@ externalproject_add(hugh-scene
 		    TEST_COMMAND        ${HUGH_TEST_COMMAND}
 		    INSTALL_COMMAND     ${HUGH_INSTALL_COMMAND}
 		    TEST_BEFORE_INSTALL 1
-		    DEPENDS             hugh-support hugh-fields)
+		    DEPENDS             hugh-build-system hugh-support hugh-fields)
