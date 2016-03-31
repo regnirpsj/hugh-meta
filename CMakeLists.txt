@@ -45,7 +45,7 @@ externalproject_add(hugh-support
 		    TEST_COMMAND        ${HUGH_TEST_COMMAND}
 		    INSTALL_COMMAND     ${HUGH_INSTALL_COMMAND}
 		    TEST_BEFORE_INSTALL 1
-		    DEPENDS             hugh-build-system hugh-support)
+		    DEPENDS             hugh-build-system)
 
 externalproject_add(hugh-fields
                     GIT_REPOSITORY      "http://github.com/regnirpsj/hugh-fields.git"
