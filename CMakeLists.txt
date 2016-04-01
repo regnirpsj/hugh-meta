@@ -8,7 +8,7 @@
 
 cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 
-project(HUGH_META VERSION 0.1.9)
+project(HUGH_META VERSION 0.1.10)
 
 set(HUGH_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/install)
 
@@ -24,7 +24,12 @@ set(HUGH_INSTALL_COMMAND ${CMAKE_COMMAND} --build . --target install)
 
 include(ExternalProject)
 
-set(HUGH_CMAKE_ARGS -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=${HUGH_INSTALL_PREFIX})
+set(HUGH_COMMON_CMAKE_ARGS)
+list(APPEND HUGH_COMMON_CMAKE_ARGS -DCMAKE_BUILD_TYPE=Release)
+list(APPEND HUGH_COMMON_CMAKE_ARGS -DCMAKE_INSTALL_MESSAGE=NEVER)
+list(APPEND HUGH_COMMON_CMAKE_ARGS -DHUGH_INSTALL_PREFIX=${HUGH_INSTALL_PREFIX})
+
+set(HUGH_CMAKE_ARGS ${HUGH_COMMON_CMAKE_ARGS})
 
 externalproject_add(hugh-build-system
                     GIT_REPOSITORY      "http://github.com/regnirpsj/hugh-build-system.git"
@@ -35,7 +40,7 @@ externalproject_add(hugh-build-system
 		    INSTALL_COMMAND     ${HUGH_INSTALL_COMMAND}
 		    TEST_BEFORE_INSTALL 1)
 
-set(HUGH_CMAKE_ARGS -DCMAKE_BUILD_TYPE=Release -DHUGH_INSTALL_PREFIX=${HUGH_INSTALL_PREFIX})
+set(HUGH_CMAKE_ARGS ${HUGH_COMMON_CMAKE_ARGS} -DHUGH_SUPPORT_DOC_USR=1 -DHUGH_SUPPORT_DOC_DEV=1)
 
 externalproject_add(hugh-support
                     GIT_REPOSITORY      "http://github.com/regnirpsj/hugh-support.git"
@@ -47,6 +52,8 @@ externalproject_add(hugh-support
 		    TEST_BEFORE_INSTALL 1
 		    DEPENDS             hugh-build-system)
 
+set(HUGH_CMAKE_ARGS ${HUGH_COMMON_CMAKE_ARGS} -DHUGH_FIELDS_DOC_USR=1 -DHUGH_FIELDS_DOC_DEV=1)
+
 externalproject_add(hugh-fields
                     GIT_REPOSITORY      "http://github.com/regnirpsj/hugh-fields.git"
 		    GIT_TAG             "master"
@@ -57,6 +64,8 @@ externalproject_add(hugh-fields
 		    TEST_BEFORE_INSTALL 1
 		    DEPENDS             hugh-build-system hugh-support)
 
+set(HUGH_CMAKE_ARGS ${HUGH_COMMON_CMAKE_ARGS} -DHUGH_PLATFORM_DOC_USR=1 -DHUGH_PLATFORM_DOC_DEV=1)
+
 externalproject_add(hugh-platform
                     GIT_REPOSITORY      "http://github.com/regnirpsj/hugh-platform.git"
 		    GIT_TAG             "master"
@@ -66,6 +75,8 @@ externalproject_add(hugh-platform
 		    INSTALL_COMMAND     ${HUGH_INSTALL_COMMAND}
 		    TEST_BEFORE_INSTALL 1
 		    DEPENDS             hugh-build-system hugh-support hugh-fields)
+
+set(HUGH_CMAKE_ARGS ${HUGH_COMMON_CMAKE_ARGS} -DHUGH_SCENE_DOC_USR=1 -DHUGH_SCENE_DOC_DEV=1)
 
 externalproject_add(hugh-scene
                     GIT_REPOSITORY      "http://github.com/regnirpsj/hugh-scene.git"
