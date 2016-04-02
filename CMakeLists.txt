@@ -87,3 +87,15 @@ externalproject_add(hugh-scene
 		    INSTALL_COMMAND     ${HUGH_INSTALL_COMMAND}
 		    TEST_BEFORE_INSTALL 1
 		    DEPENDS             hugh-build-system hugh-support hugh-fields)
+
+set(HUGH_CMAKE_ARGS ${HUGH_COMMON_CMAKE_ARGS} -DHUGH_RENDER_SW_DOC_USR=1 -DHUGH_RENDER_SW_DOC_DEV=1)
+
+externalproject_add(hugh-render-sw
+                    GIT_REPOSITORY      "http://github.com/regnirpsj/hugh-render-sw.git"
+		    GIT_TAG             "master"
+		    CMAKE_ARGS          ${HUGH_CMAKE_ARGS}
+		    BUILD_COMMAND       ${HUGH_BUILD_COMMAND}
+		    TEST_COMMAND        ${HUGH_TEST_COMMAND}
+		    INSTALL_COMMAND     ${HUGH_INSTALL_COMMAND}
+		    TEST_BEFORE_INSTALL 1
+		    DEPENDS             hugh-build-system hugh-scene hugh-support)
