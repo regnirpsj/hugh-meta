@@ -8,7 +8,7 @@
 
 cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 
-project(HUGH_META VERSION 0.1.11)
+project(HUGH_META VERSION 0.1.13)
 
 set(HUGH_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/install)
 
