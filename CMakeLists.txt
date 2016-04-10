@@ -8,7 +8,7 @@
 
 cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 
-project(HUGH_META VERSION 0.1.14 LANGUAGES NONE)
+project(HUGH_META VERSION 0.1.15 LANGUAGES NONE)
 
 if(NOT HUGH_INSTALL_PREFIX)
   set(HUGH_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/install)
@@ -102,3 +102,14 @@ externalproject_add(hugh-render-sw
 		    TEST_BEFORE_INSTALL 1
 		    DEPENDS             hugh-build-system hugh-scene hugh-support)
 
+set(HUGH_CMAKE_ARGS ${HUGH_COMMON_CMAKE_ARGS} -DHUGH_GUI_EXAMPLES_DOC_USR=1 -DHUGH_GUI_EXAMPLES_DOC_DEV=1)
+
+externalproject_add(hugh-gui-examples
+                    GIT_REPOSITORY      "http://github.com/regnirpsj/hugh-gui-examples.git"
+		    GIT_TAG             "master"
+		    CMAKE_ARGS          ${HUGH_CMAKE_ARGS}
+		    BUILD_COMMAND       ${HUGH_BUILD_COMMAND}
+		    TEST_COMMAND        ${HUGH_TEST_COMMAND}
+		    INSTALL_COMMAND     ${HUGH_INSTALL_COMMAND}
+		    TEST_BEFORE_INSTALL 1
+		    DEPENDS             hugh-build-system hugh-support)
