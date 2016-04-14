@@ -42,6 +42,16 @@ externalproject_add(hugh-build-system
 		    INSTALL_COMMAND     ${HUGH_INSTALL_COMMAND}
 		    TEST_BEFORE_INSTALL 1)
 
+externalproject_add(hugh-data
+                    GIT_REPOSITORY      "http://github.com/regnirpsj/hugh-data.git"
+		    GIT_TAG             "master"
+		    CMAKE_ARGS          ${HUGH_CMAKE_ARGS}
+		    BUILD_COMMAND       ${HUGH_BUILD_COMMAND}
+		    TEST_COMMAND        ""
+		    INSTALL_COMMAND     ${HUGH_INSTALL_COMMAND}
+		    TEST_BEFORE_INSTALL 0
+		    DEPENDS             hugh-build-system)
+
 set(HUGH_CMAKE_ARGS ${HUGH_COMMON_CMAKE_ARGS} -DHUGH_SUPPORT_DOC_USR=1 -DHUGH_SUPPORT_DOC_DEV=1)
 
 externalproject_add(hugh-support
@@ -76,7 +86,7 @@ externalproject_add(hugh-platform
 		    TEST_COMMAND        ${HUGH_TEST_COMMAND}
 		    INSTALL_COMMAND     ${HUGH_INSTALL_COMMAND}
 		    TEST_BEFORE_INSTALL 1
-		    DEPENDS             hugh-build-system hugh-support hugh-fields)
+		    DEPENDS             hugh-build-system hugh-fields hugh-support)
 
 set(HUGH_CMAKE_ARGS ${HUGH_COMMON_CMAKE_ARGS} -DHUGH_SCENE_DOC_USR=1 -DHUGH_SCENE_DOC_DEV=1)
 
@@ -88,7 +98,7 @@ externalproject_add(hugh-scene
 		    TEST_COMMAND        ${HUGH_TEST_COMMAND}
 		    INSTALL_COMMAND     ${HUGH_INSTALL_COMMAND}
 		    TEST_BEFORE_INSTALL 1
-		    DEPENDS             hugh-build-system hugh-support hugh-fields)
+		    DEPENDS             hugh-build-system hugh-data hugh-fields hugh-support)
 
 set(HUGH_CMAKE_ARGS ${HUGH_COMMON_CMAKE_ARGS} -DHUGH_RENDER_SW_DOC_USR=1 -DHUGH_RENDER_SW_DOC_DEV=1)
 
@@ -100,7 +110,7 @@ externalproject_add(hugh-render-sw
 		    TEST_COMMAND        ${HUGH_TEST_COMMAND}
 		    INSTALL_COMMAND     ${HUGH_INSTALL_COMMAND}
 		    TEST_BEFORE_INSTALL 1
-		    DEPENDS             hugh-build-system hugh-scene hugh-support)
+		    DEPENDS             hugh-build-system hugh-data hugh-scene hugh-support)
 
 set(HUGH_CMAKE_ARGS ${HUGH_COMMON_CMAKE_ARGS} -DHUGH_GUI_EXAMPLES_DOC_USR=1 -DHUGH_GUI_EXAMPLES_DOC_DEV=1)
 
@@ -112,4 +122,4 @@ externalproject_add(hugh-gui-examples
 		    TEST_COMMAND        ${HUGH_TEST_COMMAND}
 		    INSTALL_COMMAND     ${HUGH_INSTALL_COMMAND}
 		    TEST_BEFORE_INSTALL 1
-		    DEPENDS             hugh-build-system hugh-support)
+		    DEPENDS             hugh-build-system hugh-data hugh-support)
