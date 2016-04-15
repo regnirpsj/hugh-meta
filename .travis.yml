@@ -5,6 +5,8 @@ language: cpp
 
 cache:
   apt: true
+  directories:
+    - ${HOME}/extra
 
 matrix:
   include:
@@ -12,6 +14,7 @@ matrix:
       addons:
         apt:
           sources:
+            - ubuntu-sdk-team
             - ubuntu-toolchain-r-test
             - george-edison55-precise-backports
             - boost-latest
@@ -22,6 +25,9 @@ matrix:
             - git
             - graphviz
             - libboost1.55-all-dev
+            - libfltk1.3-dev
+            - libgtkmm-3.0-dev
+            - qtbase5-dev
             - g++-5
       env:
         - MATRIX_CC=gcc-5
@@ -30,6 +36,7 @@ matrix:
       addons:
         apt:
           sources:
+            - ubuntu-sdk-team
             - ubuntu-toolchain-r-test
             - llvm-toolchain-precise-3.7
             - george-edison55-precise-backports
@@ -41,6 +48,9 @@ matrix:
             - git
             - graphviz
             - libboost1.55-all-dev
+            - libfltk1.3-dev
+            - libgtkmm-3.0-dev
+            - qtbase5-dev
             - clang-3.7
       env:
         - MATRIX_CC=clang-3.7
