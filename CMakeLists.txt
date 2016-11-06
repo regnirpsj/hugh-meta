@@ -64,6 +64,18 @@ externalproject_add(hugh-support
 		    TEST_BEFORE_INSTALL 1
 		    DEPENDS             hugh-build-system)
 
+set(HUGH_CMAKE_ARGS ${HUGH_COMMON_CMAKE_ARGS} -DHUGH_EVENTS_DOC_USR=1 -DHUGH_EVENTS_DOC_DEV=1)
+
+externalproject_add(hugh-events
+                    GIT_REPOSITORY      "http://github.com/regnirpsj/hugh-events.git"
+		    GIT_TAG             "master"
+		    CMAKE_ARGS          ${HUGH_CMAKE_ARGS}
+		    BUILD_COMMAND       ${HUGH_BUILD_COMMAND}
+		    TEST_COMMAND        ${HUGH_TEST_COMMAND}
+		    INSTALL_COMMAND     ${HUGH_INSTALL_COMMAND}
+		    TEST_BEFORE_INSTALL 1
+		    DEPENDS             hugh-build-system hugh-support)
+
 set(HUGH_CMAKE_ARGS ${HUGH_COMMON_CMAKE_ARGS} -DHUGH_FIELDS_DOC_USR=1 -DHUGH_FIELDS_DOC_DEV=1)
 
 externalproject_add(hugh-fields
