@@ -34,8 +34,8 @@ set(HUGH_TEST_COMMAND    ${CMAKE_COMMAND} --build . --target test_all)
 set(HUGH_INSTALL_COMMAND ${CMAKE_COMMAND} --build . --target install)
 
 if(WIN32)
-  set(HUGH_BUILD_COMMAND   ${HUGH_BUILD_COMMAND} -- /nologo /v:m /m:1)
-  set(HUGH_TEST_COMMAND    ${HUGH_TEST_COMMAND} -- /nologo /v:m /m:1)
+  set(HUGH_BUILD_COMMAND ${HUGH_BUILD_COMMAND} -- /nologo /v:m)
+  set(HUGH_TEST_COMMAND  ${HUGH_TEST_COMMAND} -- /nologo /v:m)
 endif()
 
 include(ExternalProject)
