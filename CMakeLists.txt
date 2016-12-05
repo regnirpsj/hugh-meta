@@ -141,6 +141,18 @@ cma_externalproject_add(hugh-render
 			TEST_BEFORE_INSTALL 1
 			DEPENDS             hugh-build-system hugh-data hugh-scene hugh-support)
 
+set(HUGH_CMAKE_ARGS ${HUGH_COMMON_CMAKE_ARGS} -DHUGH_RENDER_HW_DOC_USR=1 -DHUGH_RENDER_HW_DOC_DEV=1)
+
+cma_externalproject_add(hugh-render-hw
+                        GIT_REPOSITORY      "${HUGH_GITHUB}/hugh-render-hw.git"
+                        GIT_TAG             "master"
+                        CMAKE_ARGS          ${HUGH_CMAKE_ARGS}
+                        BUILD_COMMAND       ${HUGH_BUILD_COMMAND}
+                        TEST_COMMAND        ${HUGH_TEST_COMMAND}
+                        INSTALL_COMMAND     ${HUGH_INSTALL_COMMAND}
+                        TEST_BEFORE_INSTALL 1
+                        DEPENDS             hugh-build-system hugh-data hugh-fields hugh-render hugh-scene hugh-support)
+
 set(HUGH_CMAKE_ARGS ${HUGH_COMMON_CMAKE_ARGS} -DHUGH_RENDER_SW_DOC_USR=1 -DHUGH_RENDER_SW_DOC_DEV=1)
 
 cma_externalproject_add(hugh-render-sw
